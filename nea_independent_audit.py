@@ -283,8 +283,8 @@ def D_V(z, Om, OL, H0):
 
 sub("L6.1 BAO 距离比（用 N.E.A. 的 Ω_m, Ω_Λ）")
 H0_use = H0_kmsMpc
-r_d_S = OBS['r_d']
-print(f"  H0 = {H0_use:.4f}, r_d = {r_d_S} (来自 S 论文)")
+r_d_S = 149.39   # N.E.A. value
+print(f"  r_d = {r_d_S:.2f} Mpc (N.E.A.)")
 
 bao_data = [
     (0.295, 'D_M', 7.93),
