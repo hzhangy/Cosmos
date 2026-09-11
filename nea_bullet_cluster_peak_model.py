@@ -1,39 +1,43 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-N.E.A. 子弹星系团：维度坍缩晕跟随星系的分离模型（峰值版）
+nea_bullet_cluster_peak_model.py
+
+N.E.A. Bullet Cluster: qualitative model.
+
+The dimensional-collapse halo is bound to the galaxy distribution
+and follows the galaxies through the collision, while the gas is
+stripped and remains at the collision center. The lensing peaks
+therefore follow the galaxy peaks, while the X-ray peak stays at
+the center.
+
+This script illustrates the qualitative geometry. It does not
+attempt a quantitative derivation of the ~300 kpc separation,
+which is taken from observation for illustrative purposes.
 """
 import numpy as np
 
-x = np.linspace(-500, 500, 1000)  # kpc
+x = np.linspace(-500, 500, 1000)
 
-# 气体分布：中心单峰
+# Qualitative profiles (for illustration only)
 sigma_gas = 100.0
 gas = np.exp(-0.5 * (x / sigma_gas)**2)
 
-# 星系+维度坍缩晕：两侧双峰
-offset = 300.0
+offset = 300.0   # observed separation, used for illustration
 sigma_gal = 50.0
-gal1 = np.exp(-0.5 * ((x - offset) / sigma_gal)**2)
-gal2 = np.exp(-0.5 * ((x + offset) / sigma_gal)**2)
-galaxies = gal1 + gal2
+galaxies = np.exp(-0.5 * ((x - offset) / sigma_gal)**2) + \
+           np.exp(-0.5 * ((x + offset) / sigma_gal)**2)
 
-# 主峰位置
-xray_peak = x[np.argmax(gas)]
-lensing_peak1 = x[np.argmax(gal1)]
-lensing_peak2 = x[np.argmax(gal2)]
-
-print("="*80)
-print("  N.E.A. 子弹星系团：维度坍缩晕跟随星系（峰值版）")
-print("="*80)
-print(f"  X射线气体主峰位置 = {xray_peak:.1f} kpc")
-print(f"  引力透镜主峰位置 1 = {lensing_peak1:.1f} kpc")
-print(f"  引力透镜主峰位置 2 = {lensing_peak2:.1f} kpc")
+print("="*70)
+print("  N.E.A. Bullet Cluster: qualitative geometry")
+print("="*70)
 print()
-print(f"  中心分离 ≈ {abs(lensing_peak1 - xray_peak):.1f} kpc")
+print("  The dimensional-collapse halo is bound to the galaxies")
+print("  and follows them through the collision.")
+print("  The gas is stripped and remains at the collision center.")
+print("  Lensing peaks therefore follow galaxy peaks;")
+print("  the X-ray peak stays at the center.")
 print()
-print("  结论：")
-print("  若维度坍缩晕绑定在星系周围，碰撞时跟随星系穿过，")
-print("  则引力透镜主峰与X射线气体主峰自然分离。")
-print("  这与子弹星系团观测一致。")
-print("="*80)
+print("  Observed peak separation: ~300 kpc (from observation, not derived)")
+print()
+print("  This is a qualitative consistency check.")
+print("  A quantitative derivation is not attempted.")
